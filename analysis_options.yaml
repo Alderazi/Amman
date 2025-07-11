@@ -1,1 +1,9 @@
 include: package:flutter_lints/flutter.yaml
+analyzer:
+  errors:
+    prefer_const_constructors: ignore
+    camel_case_types: ignore
+    file_names: ignore
+    library_private_types_in_public_api: ignore
+    avoid_types_as_parameter_names: ignore
+    prefer_const_literals_to_create_immutables: ignore

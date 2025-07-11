@@ -1,20 +1,24 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import './camera/cameraPage.dart';
+List<CameraDescription> cameras = [];
 
-void main() {
-  runApp(const MainApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Camera App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: CameraPage(),
     );
   }
 }
