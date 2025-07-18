@@ -8,8 +8,9 @@ class CameraPage extends StatefulWidget {
 }
 
 class _CameraPageState extends State<CameraPage> {
-  late CameraController _cameraController;
+  CameraController? _cameraController;
   bool _isCameraInitialized = false;
+  bool _hasError = false;
 
   @override
   void initState() {
@@ -18,38 +19,45 @@ class _CameraPageState extends State<CameraPage> {
   }
 
   Future<void> _initCamera() async {
-    if (cameras.isNotEmpty) {
-      _cameraController = CameraController(
-        cameras[0], // back camera
-        ResolutionPreset.medium,
-        enableAudio: false,
-      );
+    try {
+      if (cameras.isNotEmpty) {
+        _cameraController = CameraController(
+          cameras[0],
+          ResolutionPreset.medium,
+          enableAudio: false,
+        );
 
-      await _cameraController.initialize();
+        await _cameraController!.initialize();
 
-      setState(() {
-        _isCameraInitialized = true;
-      });
-    } else {
-      print('No cameras available');
+        if (!mounted) return;
+
+        setState(() {
+          _isCameraInitialized = true;
+        });
+      } else {
+        print('❌ No cameras found.');
+        setState(() => _hasError = true);
+      }
+    } catch (e) {
+      print('❌ Camera error: $e');
+      setState(() => _hasError = true);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Real-time Camera")),
-      body: _isCameraInitialized
-          ? CameraPreview(_cameraController)
-          : Center(child: CircularProgressIndicator()),
-    );
+    if (_hasError) {
+      return Center(child: Text("Failed to load camera"));
+    }
+
+    return _isCameraInitialized && _cameraController != null
+        ? CameraPreview(_cameraController!)
+        : Center(child: CircularProgressIndicator());
   }
 
   @override
   void dispose() {
-    if (_isCameraInitialized) {
-      _cameraController.dispose();
-    }
+    _cameraController?.dispose();
     super.dispose();
   }
 }

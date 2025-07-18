@@ -1,7 +1,7 @@
 include: package:flutter_lints/flutter.yaml
 analyzer:
   errors:
-    prefer_const_constructors: ignore
+    prefer_const_constructors: ignore ignore
     camel_case_types: ignore
     file_names: ignore
     library_private_types_in_public_api: ignore
