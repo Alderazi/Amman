@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-NewsFuse 
-bbbbbbbbbbbbbbbbbbbbbbbbbbb
-
-
-NewsFuse is a modren app that combine several NewsPaper with ability to summary the news using machine learning techniques
-=======
 # Amman
 # Date: 6/18/2025
 # By Qassim Alderazi
@@ -28,4 +21,3 @@ NewsFuse is a modren app that combine several NewsPaper with ability to summary 
 ##### images:[duck duck go](https://duckduckgo.com)
 ##### Markdown Guide: [ia.net](https://ia.net/writer/support/general/markdown-guide)
 ##### Markdown Cheatsheet: [GitHub](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
->>>>>>> 31d1ad0 (separate every function from the main code)
